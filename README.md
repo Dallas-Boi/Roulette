@@ -1,0 +1,1 @@
+This is a edited verison of a roulette table that I forked from <a href="https://codepen.io/pder/pen/WYrRQm">CodePen</a> made by <a href="https://codepen.io/pder">pder</a>. This Roulette table allows to be played with other people on other devices using socket.io.
