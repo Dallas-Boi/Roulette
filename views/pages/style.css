@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 .number:nth-child(1) {
     transform: rotateZ(9.72972973deg);
 }
@@ -152,13 +156,14 @@ body {
 .main {
     width: 374px;
     height: 100%;
-    margin: 0 auto;
     margin-top: auto;
-    display: flex;
-    flex-wrap: wrap;
 }
 
-#gameDiv {margin-left: 10em;}
+#gameDiv {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
 
 .plate {
     background-color: gray;
@@ -512,7 +517,7 @@ body {
     font-size: 15px;
     width: 375px;
     padding: 12px;
-    margin: 12px;
+    margin-top: 12px;
     cursor: pointer;
     color: #fff;
     font-family: 'Roboto', sans-serif;
@@ -684,17 +689,300 @@ body {
     flex-direction: column;
 }
 
-label {
+#nameLabel {
     text-align: center;
     font-size: 20px;
-    color:white;
-    padding:10px;
+    color: white;
+    padding: 10px;
 }
 
-input {
+#nameInp {
     border-radius: 50em;
-    border:2px solid black;
+    border: 2px solid black;
     width: 15em;
     font-size: 20px;
-    padding:10px
+    padding: 10px
+}
+
+#leftSide {
+    width: 47em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: right;
+}
+
+#table {
+    width: 47em;
+    height: 25em;
+}
+
+/* Roulette Table */
+.container-first {
+    display: flex;
+    flex-flow: column-reverse wrap;
+    align-content: flex-start;
+    width: auto;
+    height: 300px;
+    padding: 0px 0px 0px 20px;
+    border-top: 2px sold white;
+}
+
+.red-item,
+.black-item,
+.zero-item {
+    box-sizing: border-box;
+    border: none;
+    border-left: 3px solid white;
+    border-top: 3px solid white;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+    width: 51.65px;
+    font-size: 30px;
+    color: white;
+}
+
+.zero-item {
+    border-bottom: 3px solid white;
+    padding-top: 110px;
+    padding-bottom: 111px;
+    height: 8.25em;
+}
+
+.red-item {
+    background-color: red;
+}
+
+.black-item {
+    background-color: black;
+}
+
+.column-item {
+    border-left: solid white;
+    border-top: solid white;
+    border-right: solid;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+    width: 50px;
+    font-size: 30px;
+    color: white;
+}
+
+.container-second {
+    display: flex;
+    width: auto;
+    height: 70px;
+    flex-flow: row wrap;
+    align-content: flex-start;
+    padding: 0px 0px 0px 72px;
+}
+
+.doz-item {
+    flex-basis: 220px;
+    border: solid white;
+    padding-top: 15px;
+    padding-bottom: 30px;
+    text-align: center;
+    height: 20px;
+    font-size: 30px;
+    color: white;
+}
+
+.container-third {
+    display: flex;
+    width: auto;
+    flex-flow: row wrap;
+    align-content: flex-start;
+    padding: 0px 0px 0px 72px;
+}
+
+.outside-section {
+    flex-basis: 107.5px;
+    border: none;
+    border-left: solid;
+    border-bottom: solid;
+    border-right: solid;
+    padding-top: 15px;
+    padding-bottom: 30px;
+    text-align: center;
+    height: 20px;
+    font-size: 30px;
+    color: white;
+}
+
+.rhomb-red {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    border: solid white;
+    transform: rotate(45deg);
+}
+
+.rhomb-black {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: black;
+    border: solid white;
+    transform: rotate(45deg);
+}
+
+.value {transform: rotate(-90deg);}
+
+.outside-section>*,
+.column-item>*,
+.red-item>*,
+.black-item>*,
+.zero-item>*,
+.doz-item>* {
+    pointer-events: none;
+}
+
+/* Dragging Box for Chips */
+#drag {
+    position: absolute;
+    width:75px;
+    height:75px;
+    z-index: 6;
+    pointer-events: none;
+}
+
+/* When the pokerchip is in the dragging div */
+#drag .pokerchip {
+    width:75px;
+    height:75px;
+    border-radius: 50%;
+    z-index: 5;
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5), 0 0 3px 0 rgba(0, 0, 0, 0.4) inset;
+    border: 2px solid;
+}
+
+#drag .pokerchip:after {
+    font: bold 30px/75px Arial;
+    text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.3), 1px 1px 0px rgba(255, 255, 255, 0.2);
+    position:relative;
+    display: block;
+    text-align: center;
+}
+
+/* Player Board */
+#player_values {
+    height: 2.75em;
+    border: 1px solid;
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    flex: 34em 0;
+}
+
+.playerCon {
+    margin: 2em;
+    margin-top: 3;
+    text-align: center;
+}
+
+.playerCash {
+    font-size: 15px;
+    color: green;
+    font-weight: bold;
+}
+
+.playerBet {
+    font-size:15px;
+    color:gray;
+}
+
+/* Poker Chips */
+#chips {
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    gap:1.7em;
+    text-align: center;
+    font-size:25px;
+}
+
+.pokerchip {
+    width:100px;
+    height:100px;
+    border-radius: 50%;
+    z-index: 5;
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5), 0 0 3px 0 rgba(0, 0, 0, 0.4) inset;
+    border: 2px solid;
+}
+
+.pokerchip:after {
+    font: bold 50px/100px Arial;
+    text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.3), 1px 1px 0px rgba(255, 255, 255, 0.2);
+}
+
+/* When the client hovers over a pokerchip */
+.pokerchip:hover {
+    cursor: pointer;
+    animation-name: spinChip;
+    animation-duration: 300ms;
+    animation-timing-function: linear;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5), 0 0 10px 0 rgba(0, 0, 0, 0.4) inset;
+}
+
+/* Spins a chip */
+@keyframes spinChip {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+
+
+.white {
+    background-color: white;
+}
+.white:after {
+    content: "1";
+    color: #C1C1C1;
+}
+
+.red {
+    background-color: red;
+}
+
+.red:after {
+    content: "5";
+    color: #6C0000;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.blue:after {
+    content: "25";
+    color: #00016C;
+}
+
+.green {
+    content: "1";
+    background-color: green;
+}
+
+.green:after {
+    content: "50";
+    color: #014100;
+}
+
+.black {
+    content: "1";
+    background-color: #444444;
+}
+
+.black:after {
+    content: "100";
+    color: #000000;
 }

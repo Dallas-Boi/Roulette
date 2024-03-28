@@ -1,20 +1,20 @@
 // Made Tuesday, March 26th, 2024
 // MenuJS
-$(".main").hide() // Hides all pages
-$("#menuDiv").show() // Shows the Menu
+$(".top").hide() // Hides all pages
+$("#gameDiv").show();$("#wheel").hide()
+//$("#menuDiv").show() // Shows the Menu
 var ready = false 
 // When the user readys up in the menu 
 $("#ready_menu").click(function() {
-    socket.emit("ready_s", $("#nameInp").val())
     // Checks if the user ready up or unready
     if (ready == false) {
         ready = true
-        this.text("Un-Ready")
+        this.textContent = "Un-Ready"
     } else {
         ready = false
-        this.text("Ready")
+        this.textContent = "Ready"
     }
-    socket.emit("player_status", ready)
+    socket.emit("player_status", [$("#nameInp").val(), ready])
 
 })
 
@@ -32,14 +32,12 @@ var red = [32,19,21,25,34,27,36,30,23,5,16,1,14,9,18,7,12,3];
 $reset.hide();
 
 $mask.text(maskDefault);
-
+// Spins the wheel
 $spin.on('click',function(){
 
     // get a random number between 0 and 36 and apply it to the nth-child selector
     // Sends the random number to the server
-    console.log(this)
     socket.emit("spin", [Math.floor(Math.random() * 36), this])
-    console.log($inner)
 });
 
 // Spins the wheel
@@ -80,6 +78,8 @@ function spinWheel(parm) {
         $thisResult = '<li class="previous-result color-'+ color +'"><span class="previous-number">'+ randomNumber +'</span><span class="previous-color">'+ color +'</span></li>';
 
         $('.previous-list').prepend($thisResult);
+        // Will check the payouts
+        checkPayout()
     }, timer);
 }
 
@@ -92,15 +92,41 @@ $reset.on('click',function(){
     $data.removeClass('reveal');
 });
 
-// so you can swipe it too
-var myElement = document.getElementById('plate');
-var mc = new Hammer(myElement);
-mc.on("swipe", function(ev) {
-    if(!$reset.hasClass('disabled')){
-        if($spin.is(':visible')){
-            $spin.click();  
-        } else {
-            $reset.click();
-        }
-    }  
+// All of the Table settings
+// Checks the payout for this players bet
+function checkPayout() {
+
+}
+
+// Allows the Dragging box follow the cursor
+$(document).on('mousemove', function(e){
+    $('#drag').css({
+       left:  e.pageX-37.5,
+       top:   e.pageY
+    });
 });
+
+// When the player clicks a chip
+$(".pokerchip").click(function() {
+    let color = (this.className).replace("pokerchip ", "")
+    // Clones the chip into the dragging element
+    var button = $(this).clone();
+    $('#drag').html(button);
+})
+
+// Adds the bet to the item on the table
+function addBet(elm) {
+    let val = elm.children[0].id
+    
+    // If value does not exist then continue to the text
+    if (val == "") {val = elm.children[0].textContent}
+    
+}
+
+// Adds click events to the table
+$("#table").children().each(function() {
+    // Containers children
+    $(this).children().each(function() {
+        $(this).click(function() {addBet(this)})
+    })
+})
